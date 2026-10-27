@@ -10,94 +10,88 @@
             theme: {
                 extend: {
                     colors: {
+                        navy: {
+                            600: '#2b4c7e',
+                            700: '#233f6b',
+                            800: '#1b3254',
+                        },
                         brand: {
-                            50: '#fff7ed',
-                            100: '#ffedd5',
-                            500: '#f97316',
-                            600: '#ea580c',
-                            700: '#c2410c',
-                            900: '#7c2d12',
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#2b4c7e',
+                            600: '#233f6b',
+                            700: '#1b3254',
+                            900: '#0f172a',
                         }
                     }
                 }
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,500;0,600;0,700;1,700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { font-family: 'Open Sans', sans-serif; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+<body class="bg-white text-slate-800 min-h-screen flex flex-col">
 
-    <!-- Navbar -->
-    <header class="bg-white/95 backdrop-blur border-b border-slate-200 sticky top-0 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-            <div class="flex items-center gap-6">
-                <a href="{{ route('home') }}" class="flex items-center gap-2.5">
-                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-500 to-amber-600 flex items-center justify-center text-white font-extrabold text-xl shadow-sm">
-                        SF
-                    </div>
-                    <div>
-                        <span class="text-xl font-extrabold tracking-tight text-slate-900">Some<span class="text-brand-600">Food</span></span>
-                        <span class="hidden sm:inline-block text-[11px] font-semibold uppercase tracking-wider bg-brand-50 text-brand-700 px-2 py-0.5 rounded-full ml-1">Restaurant OS</span>
-                    </div>
+    <!-- Navbar (Exact match to SomeFood screenshot: #2b4c7e navy header) -->
+    <header class="bg-[#2b4c7e] text-white sticky top-0 z-40 shadow-md">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <a href="{{ route('home') }}" class="text-xl font-bold italic tracking-wide text-white hover:opacity-90 transition">
+                    SomeFood
                 </a>
 
-                <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
-                    <a href="{{ route('home') }}" class="px-3 py-2 rounded-lg {{ request()->routeIs('home') ? 'bg-brand-50 text-brand-700 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
-                        Katalog Menu
-                    </a>
-                    @auth
+                @auth
+                    <div class="hidden md:flex items-center gap-2 text-xs font-semibold border-l border-white/20 pl-6">
                         @if(auth()->user()->isAdmin())
-                            <a href="{{ route('admin.dashboard') }}" class="px-3 py-2 rounded-lg {{ request()->routeIs('admin.dashboard') ? 'bg-brand-50 text-brand-700 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
-                                Dashboard Admin
+                            <a href="{{ route('admin.dashboard') }}" class="px-2.5 py-1.5 rounded {{ request()->routeIs('admin.dashboard') ? 'bg-white/20 text-white' : 'text-white/80 hover:text-white hover:bg-white/10' }}">
+                                Dashboard
                             </a>
-                            <a href="{{ route('admin.menus.index') }}" class="px-3 py-2 rounded-lg {{ request()->routeIs('admin.menus.*') ? 'bg-brand-50 text-brand-700 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
-                                Kelola Menu
+                            <a href="{{ route('admin.menus.index') }}" class="px-2.5 py-1.5 rounded {{ request()->routeIs('admin.menus.*') ? 'bg-white/20 text-white' : 'text-white/80 hover:text-white hover:bg-white/10' }}">
+                                CRUD Menu
                             </a>
-                            <a href="{{ route('admin.categories.index') }}" class="px-3 py-2 rounded-lg {{ request()->routeIs('admin.categories.*') ? 'bg-brand-50 text-brand-700 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
+                            <a href="{{ route('admin.categories.index') }}" class="px-2.5 py-1.5 rounded {{ request()->routeIs('admin.categories.*') ? 'bg-white/20 text-white' : 'text-white/80 hover:text-white hover:bg-white/10' }}">
                                 Kategori
                             </a>
-                            <a href="{{ route('admin.ingredients.index') }}" class="px-3 py-2 rounded-lg {{ request()->routeIs('admin.ingredients.*') ? 'bg-brand-50 text-brand-700 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
+                            <a href="{{ route('admin.ingredients.index') }}" class="px-2.5 py-1.5 rounded {{ request()->routeIs('admin.ingredients.*') ? 'bg-white/20 text-white' : 'text-white/80 hover:text-white hover:bg-white/10' }}">
                                 Stok Bahan
                             </a>
                         @endif
                         @if(auth()->user()->isAdmin() || auth()->user()->isKitchenStaff())
-                            <a href="{{ route('kitchen.index') }}" class="px-3 py-2 rounded-lg {{ request()->routeIs('kitchen.*') ? 'bg-brand-50 text-brand-700 font-semibold' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100' }}">
-                                Kitchen Display (KDS)
+                            <a href="{{ route('kitchen.index') }}" class="px-2.5 py-1.5 rounded {{ request()->routeIs('kitchen.*') ? 'bg-white/20 text-white' : 'text-white/80 hover:text-white hover:bg-white/10' }}">
+                                Kitchen (KDS)
                             </a>
                         @endif
-                    @endauth
-                </nav>
+                    </div>
+                @endauth
             </div>
 
-            <div class="flex items-center gap-3">
+            <nav class="flex items-center gap-6 text-sm font-medium">
+                <a href="{{ route('home') }}" class="text-white hover:text-slate-200 transition">Home</a>
+                <a href="{{ route('home') }}#food-section" class="text-white hover:text-slate-200 transition">Food</a>
+                <a href="{{ route('home') }}#news-section" class="text-white hover:text-slate-200 transition">News</a>
+                <a href="{{ route('home') }}#about-section" class="text-white hover:text-slate-200 transition">About Me</a>
+
                 @auth
-                    <div class="flex items-center gap-3">
-                        <div class="text-right hidden sm:block">
-                            <p class="text-xs font-bold text-slate-900">{{ auth()->user()->name }}</p>
-                            <span class="text-[10px] font-bold uppercase px-2 py-0.5 rounded-full
-                                {{ auth()->user()->role === 'admin' ? 'bg-purple-100 text-purple-700' : (auth()->user()->role === 'kitchen_staff' ? 'bg-amber-100 text-amber-800' : 'bg-emerald-100 text-emerald-700') }}">
-                                {{ str_replace('_', ' ', auth()->user()->role) }}
-                            </span>
-                        </div>
-                        <form action="{{ route('logout') }}" method="POST">
+                    <div class="flex items-center gap-2 pl-3 border-l border-white/20">
+                        <span class="hidden sm:inline-block text-xs bg-white/15 px-2.5 py-1 rounded text-white font-semibold">
+                            {{ auth()->user()->name }}
+                        </span>
+                        <form action="{{ route('logout') }}" method="POST" class="inline">
                             @csrf
-                            <button type="submit" class="text-xs font-semibold text-slate-600 hover:text-red-600 border border-slate-200 hover:border-red-200 px-3 py-2 rounded-lg transition">
-                                Keluar
+                            <button type="submit" class="text-xs bg-red-500/80 hover:bg-red-600 text-white px-2.5 py-1 rounded transition">
+                                Logout
                             </button>
                         </form>
                     </div>
                 @else
-                    <a href="{{ route('login') }}" class="text-sm font-semibold text-slate-700 hover:text-brand-600 px-3 py-2">
-                        Masuk
-                    </a>
-                    <a href="{{ route('register') }}" class="text-sm font-semibold bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-xl shadow-sm transition">
-                        Daftar
+                    <a href="{{ route('login') }}" class="text-xs bg-white/15 hover:bg-white/25 text-white px-3 py-1.5 rounded border border-white/30 transition">
+                        Login
                     </a>
                 @endauth
-            </div>
+            </nav>
         </div>
     </header>
 
@@ -131,13 +125,15 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-slate-200 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+    <footer id="about-section" class="bg-[#2b4c7e] text-white mt-16">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/80">
             <div>
-                <span class="font-bold text-slate-800">SomeFood</span> — Laravel 10 Restaurant Management Platform (Sanctum, Midtrans/Xendit, WhatsApp & Email Notification)
+                <span class="font-bold italic text-white text-sm">SomeFood</span> — Laravel 10 Restaurant Management Platform
             </div>
-            <div class="flex items-center gap-4">
-                <span>Multi-Role: Admin · Kitchen Staff · Customer</span>
+            <div class="flex items-center gap-6">
+                <a href="{{ route('home') }}" class="hover:text-white">Home</a>
+                <a href="#food-section" class="hover:text-white">Food</a>
+                <a href="{{ route('login') }}" class="hover:text-white">Admin & Staff Portal</a>
             </div>
         </div>
     </footer>
